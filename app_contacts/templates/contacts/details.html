@@ -9,4 +9,20 @@
 
 {% block body %}
 <h1>Contacts</h1>
+
+    <div class="form">
+        <form action="{% url 'contacts:add-form' %}?next={{ request.path }}" method="post" class="form">
+            {% csrf_token %}
+
+            <div class="description">
+                {{ form.description }}
+            </div>
+
+            <button type="submit" class="button add-review-button mt-2">
+                <i class="fa-solid fa-message"></i>
+                <span>Save Review</span>
+            </button>
+        </form>
+    </div>
+
 {% endblock %}
