@@ -1,0 +1,38 @@
+:root {
+    --header-bg: gray;
+    --header-color: white;
+    --header-nav-color: white;
+
+    --footer-bg: gray;
+    --footer-color: white;
+}
+
+/* Header */
+.header {
+    background: var(--header-bg);
+    color: var(--header-color);
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .nav__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+    .nav__link {
+        text-decoration: none;
+        color: var(--header-nav-color);
+    }
+}
+
+/* Footer */
+.footer {
+    background: var(--footer-bg);
+    color: var(--footer-color);
+    min-height: 60px;
+}

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="favicon-icon" rel="shortcut icon" type="image/svg+xml" href="{% static '/img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '/css/bootstrap/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/bootstrap/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    {% block styles %}{% endblock %}
+    <title>{% block title %}Box{% endblock %}</title>
+</head>
+<body>
+{% include 'parts/header.html' %}
+
+<main class="main">
+{% block body %}{% endblock %}
+</main>
+
+{% include 'parts/footer.html' %}
+
+<script src="{% static '/js/scripts.js' %}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
