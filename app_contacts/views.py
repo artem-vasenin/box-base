@@ -7,6 +7,7 @@ from .forms import ExcursionForm
 
 
 class DetailsView(View):
+    """ EndPoint показа страницы контакта """
     def get(self, request: HttpRequest) -> HttpResponse:
         form = ExcursionForm()
         ctx = {
@@ -14,18 +15,16 @@ class DetailsView(View):
         }
         return render(request, 'contacts/details.html', ctx)
 
-
-
-class AddFormView(View):
-    """ Контроллер добавления заявки """
+    """ EndPoint добавления заявки """
     def post(self, request: HttpRequest) -> HttpResponse:
-        next_url = request.GET.get('next') or '/'
         form = ExcursionForm(request.POST)
 
         if form.is_valid():
             form.save()
+            print('valid')
             messages.success(request, 'Заявка успешно добавлена')
         else:
             messages.error(request, 'Заявка не добавлена')
+            print(form.errors)
 
-        return redirect(next_url)
+        return render(request, 'contacts/details.html', {'form': form})
