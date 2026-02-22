@@ -4,9 +4,26 @@
 {% block title %}Главная{% endblock %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static '/css/pages/home/styles.css' %}">
+    <link rel="stylesheet" href="{% static '/pages/home/css/styles.css' %}">
 {% endblock %}
 
 {% block body %}
-<h1>Home</h1>
+<section class="home">
+    <section class="billboard">
+        <div class="container" style="background-image: url('{{ page.image.url }}')">
+            <div class="row">
+                <div class="col">
+                    <div class="billboard__content">
+                        <div class="billboard__content-subtitle">{{ page.subtitle }}</div>
+                        <div class="billboard__content-title">{{ page.name }}</div>
+                        <div class="billboard__content-benefits">{{ page.short_description|safe }}</div>
+                        <div class="billboard__content-actions">
+                            <a href="{% url 'contacts:details' %}" class="btn btn--accent btn--big">Записаться</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
 {% endblock %}

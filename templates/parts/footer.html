@@ -1,1 +1,42 @@
-<footer class="footer">Footer</footer>
+{% load static %}
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-3 d-none d-lg-block">
+                <div class="logo">
+                    <a href="{% url 'home:details' %}" class="logo__link">
+                        <img src="{% static '/img/logo.png' %}" alt="logo" class="logo__img">
+                    </a>
+                </div>
+                {% include 'parts/social.html' with bg='#FFEDB7' text='#9EB378' size=40 %}
+            </div>
+            <div class="col col-lg-5 d-none d-lg-flex align-items-center">
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#" class="nav__link text-row">О нас</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link text-row">Образование</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link text-row">Родителям</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link text-row">Галерея</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col col-lg-4">
+                <div class="text-row mb-1">г. Москва, ул. Московcкая, д. 32б</div>
+                <div class="text-row mb-1">Пн-Пт с 8:00 до 20:00</div>
+                <div class="text-row mb-1">+7(999)999 99 99</div>
+                <div class="text-row mb-2">MoskowDS@gmail.ru</div>
+                <div class="d-lg-none">
+                    {% include 'parts/social.html' with bg='#FFEDB7' text='#9EB378' size=30 %}
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

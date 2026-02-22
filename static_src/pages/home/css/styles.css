@@ -1,0 +1,97 @@
+.home {
+    background-color: var(--home-bg);
+
+    .billboard {
+        .container {
+            background-repeat: no-repeat;
+            background-position: bottom center;
+            background-size: 330px;
+            padding-top: 50px;
+            padding-bottom: 360px;
+
+            @media screen and (min-width: 992px) {
+                background-position: right bottom;
+                background-size: 50%;
+                padding-top: 140px;
+                padding-bottom: 160px;
+            }
+
+            @media screen and (min-width: 1200px) {
+                background-size: 600px;
+            }
+        }
+    }
+    .billboard__content {
+        @media screen and (min-width: 992px) {
+            width: 730px;
+        }
+    }
+    .billboard__content-subtitle {
+        font-size: 16px;
+        line-height: 1.4;
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: var(--font-montserrat), sans-serif;
+        color: var(--color-dark);
+
+        @media screen and (min-width: 992px) {
+            font-size: 32px;
+            line-height: 42px;
+            text-align: initial;
+        }
+    }
+    .billboard__content-title {
+        font-size: 26px;
+        line-height: 1.4;
+        text-align: center;
+        margin-bottom: 26px;
+        font-weight: 700;
+        font-family: var(--font-montserrat), sans-serif;
+        color: var(--color-dark);
+
+        @media screen and (min-width: 992px) {
+            font-size: 48px;
+            line-height: 58px;
+            text-align: initial;
+            margin-bottom: 40px;
+        }
+    }
+    .billboard__content-benefits {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 320px;
+        margin: 0 auto 30px;
+
+        @media screen and (min-width: 992px) {
+            width: 630px;
+            margin: 0 0 40px;
+        }
+
+        p {
+        display: block;
+        color: var(--color-green);
+        font-size: 12px;
+        line-height: 22px;
+        font-family: var(--font-montserrat), sans-serif;
+        background-image: url("../img/underline.png");
+        background-repeat: no-repeat;
+        background-position: bottom left;
+        background-size: 100%;
+
+        @media screen and (min-width: 992px) {
+            font-size: 24px;
+            line-height: 32px;
+        }
+    }
+    }
+    .billboard__content-actions {
+        text-align: center;
+
+        @media screen and (min-width: 992px) {
+            text-align: initial;
+        }
+    }
+}

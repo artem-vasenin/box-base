@@ -1,6 +1,7 @@
 import os
 from django.db import models
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 
 
 def page_image_path(instance, filename):
@@ -11,7 +12,7 @@ class PageCategory(models.Model):
     """ Модель категории универсальных страниц """
     name = models.CharField(max_length=100, verbose_name='Название категории')
     slug = models.SlugField(max_length=100, unique=True, blank=True, verbose_name='Алиас')
-    description = models.TextField(null=True, blank=True, verbose_name='Описание')
+    description = RichTextField(null=True, blank=True, verbose_name='Описание')
     image = models.ImageField(upload_to=page_image_path, null=True, blank=True, verbose_name='Изображение')
     parent = models.ForeignKey(
         'self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children', verbose_name='Родительская категория',
@@ -40,8 +41,8 @@ class Page(models.Model):
     name = models.CharField(max_length=250, verbose_name='Название')
     subtitle = models.CharField(max_length=250, unique=True, blank=True, verbose_name='Подзаголовок')
     slug = models.SlugField(max_length=250, unique=True, blank=True, verbose_name='Алиас')
-    short_description = models.TextField(null=True, blank=True, verbose_name='Краткое описание')
-    description = models.TextField(null=True, blank=True, verbose_name='Описание')
+    short_description = RichTextField(null=True, blank=True, verbose_name='Краткое описание')
+    description = RichTextField(null=True, blank=True, verbose_name='Описание')
     views = models.IntegerField(default=0, blank=True, verbose_name='Просмотры')
     category = models.ForeignKey(PageCategory, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Категория')
     is_active = models.BooleanField(default=True, blank=True, verbose_name='Активен')
