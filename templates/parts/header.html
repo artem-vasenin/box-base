@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col col-lg-1 logo">
                 <a href="{% url 'home:details' %}" class="logo__link">
-                    <img src="{% static '/img/logo.png' %}" alt="logo" class="logo__img">
+                    <img src="{{ site_settings.logo.url }}" alt="logo" class="logo__img">
                 </a>
             </div>
             <div class="col nav d-flex d-lg-none justify-content-end align-content-center">

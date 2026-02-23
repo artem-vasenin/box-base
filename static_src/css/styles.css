@@ -226,6 +226,7 @@
     font-weight: 600;
     font-size: 24px;
     padding: 0 20px;
+    text-decoration: none;
 
     &.btn--accent {
         background-color: var(--color-red-lite);

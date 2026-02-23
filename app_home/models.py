@@ -2,6 +2,8 @@ import os
 from django.db import models
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
+from PIL import Image
+from django.core.validators import RegexValidator
 
 
 def page_image_path(instance, filename):
@@ -33,8 +35,21 @@ class PageCategory(models.Model):
             self.slug = slug
         super().save(*args, **kwargs)
 
+        if self.image:
+            img = Image.open(self.image.path)
+
+            max_width = 1200
+
+            if img.width > max_width:
+                ratio = max_width / img.width
+                new_height = int(img.height * ratio)
+
+                img = img.resize((max_width, new_height), Image.LANCZOS)
+                img.save(self.image.path, optimize=True, quality=85)
+
     def __str__(self):
         return self.name
+
 
 class Page(models.Model):
     """ Модель универсальных страниц """
@@ -72,8 +87,21 @@ class Page(models.Model):
             self.slug = slug
         super().save(*args, **kwargs)
 
+        if self.image:
+            img = Image.open(self.image.path)
+
+            max_width = 1200
+
+            if img.width > max_width:
+                ratio = max_width / img.width
+                new_height = int(img.height * ratio)
+
+                img = img.resize((max_width, new_height), Image.LANCZOS)
+                img.save(self.image.path, optimize=True, quality=85)
+
     def __str__(self):
         return self.name
+
 
 class Map(models.Model):
     """ Модель Яндекс карты """
@@ -92,3 +120,51 @@ class Map(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Contacts(models.Model):
+    """ Модель для контактов """
+    image = models.ImageField(upload_to='contacts/', null=True, blank=True, verbose_name='Фото')
+    email = models.EmailField(null=True, blank=True, verbose_name='E-mail')
+    address = models.CharField(max_length=500, null=True, blank=True, verbose_name='Адрес')
+    schedule = models.CharField(max_length=250, null=True, blank=True, verbose_name='Расписание')
+    phone = models.CharField(max_length=11, null=True, blank=True, verbose_name='Телефон', validators=[
+        RegexValidator(
+                regex=r'^79\d{9}$',
+                message='Номер телефона должен начинаться с 79 и содержать 11 цифр, например: 79529999999',
+            ),
+        ]
+    )
+    page = models.ForeignKey(Page, on_delete=models.CASCADE, null=True, blank=True, related_name='contacts', verbose_name='Страница')
+
+    class Meta:
+        verbose_name = "Контакт"
+        verbose_name_plural = "Контакты"
+
+
+class Settings(models.Model):
+    """ Модель для глобальных настроек """
+    logo = models.ImageField(upload_to='settings/', null=True, blank=True, verbose_name='Логотип')
+    icons = models.TextField(null=True, blank=True, verbose_name='Иконки SVG')
+    admin_email = models.EmailField(null=True, blank=True, verbose_name='E-mail администратора')
+
+    class Meta:
+        verbose_name = "Настройки"
+        verbose_name_plural = "Настройки"
+
+
+class MenuItem(models.Model):
+    """ Модель для работы с меню """
+    title = models.CharField(max_length=120, verbose_name='Название')
+    url = models.CharField(max_length=255, verbose_name='URL')
+    order = models.PositiveIntegerField(default=0, verbose_name='Позиция')
+    is_active = models.BooleanField(default=True, verbose_name='Активен')
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Пункт меню"
+        verbose_name_plural = "Пункты меню"
+
+    def __str__(self):
+        return self.title
+

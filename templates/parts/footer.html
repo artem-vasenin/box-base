@@ -5,7 +5,7 @@
             <div class="col col-lg-3 d-none d-lg-block">
                 <div class="logo">
                     <a href="{% url 'home:details' %}" class="logo__link">
-                        <img src="{% static '/img/logo.png' %}" alt="logo" class="logo__img">
+                        <img src="{{ site_settings.logo.url }}" alt="logo" class="logo__img">
                     </a>
                 </div>
                 {% include 'parts/social.html' with bg='#FFEDB7' text='#9EB378' size=40 %}
@@ -34,9 +34,11 @@
                 <div class="text-row mb-1">+7(999)999 99 99</div>
                 <div class="text-row mb-2">MoskowDS@gmail.ru</div>
                 <div class="d-lg-none">
-                    {% include 'parts/social.html' with bg='#FFEDB7' text='#9EB378' size=30 %}
+                    {% include 'parts/social.html' %}
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
+
